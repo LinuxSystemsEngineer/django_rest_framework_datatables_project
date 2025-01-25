@@ -1,0 +1,99 @@
+{% extends "vlans/base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <h4 class="bg-primary text-white p-2" style="margin: 0px;">CoreSubnets SQLite Database</h4>
+    </div>
+</div>
+<div class="row" style="background-color: white; padding: 20px; border-radius: 10px;">
+    <div class="col-sm-12 text-center">
+        <a href="/" class="btn btn-success mr-2">Home</a>  <!-- Home button -->
+        <a href="/admin/vlans/coresubnets/" class="btn btn-primary mr-2">Manage Records</a>
+        <form id="logout-form" method="post" action="/admin/logout/" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Log out</button>
+        </form>
+    </div>
+    <br><br>
+    <div class="col-sm-12">
+        <table id="coresubnets_table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID:</th>
+                    <th>CORE:</th>
+                    <th>SUBNETS:</th>
+                    <th>VLAN_NAME:</th>
+                    <th>VLAN_ID:</th>
+                    <th>GUEST_VRF_LOCAL:</th>
+                    <th>SWITCH_PORT_PRI:</th>
+                    <th>GUEST_VRF_SC:</th>
+                    <th>SWITCH_PORT_SEC:</th>
+                    <th>DHCP:</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<footer class="footer" style="margin-top: 25px;">
+    <div class="container">
+        <p class="text-muted text-center">
+            Copyright © 2024
+        </p>
+    </div>
+</footer>
+{% endblock %}
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#coresubnets_table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "orderMulti": true,  // Enable multi-column sorting
+        "ajax": {
+            "url": "/api/coresubnets_data/",
+            "type": "GET",
+            "dataSrc": function(json) {
+                console.log('Received JSON:', json);  // Log received JSON data
+                return json.results.map(function(data) {
+                    return data;
+                });
+            },
+            "data": function(d) {
+                console.log('Outgoing data request:', d);  // Log outgoing request
+                d.page_size = d.length === -1 ? 10000 : d.length;  // Handle "All" entries (set a high number)
+                d.order_columns = d.order.map(function(o) { return d.columns[o.column].data; });  // Send column names for sorting
+                d.order_dirs = d.order.map(function(o) { return o.dir; });  // Send sort directions
+                return d;
+            }
+        },
+        "columns": [
+            {"data": "id"},
+            {"data": "core"},
+            {"data": "subnets"},
+            {"data": "vlan_name"},
+            {"data": "vlan_id"},
+            {"data": "guest_vrf_local"},
+            {"data": "switch_port_pri"},
+            {"data": "guest_vrf_sc"},
+            {"data": "switch_port_sec"},
+            {"data": "dhcp"},
+        ],
+        "paging": true,
+        "pageLength": 10,
+        "lengthMenu": [
+            [10, 25, 50, 100],
+            [10, 25, 50, 100]
+        ],
+        "responsive": true,
+        "rowReorder": {
+            selector: 'td:nth-child(2)'
+        },
+        "dom": 'Blfrtip',
+        "buttons": ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5', 'print'],
+        "drawCallback": function(settings) {
+            console.log('DataTables Draw Callback:', settings);  // Log DataTables settings after each draw
+        }
+    });
+});
+</script>
+{% endblock extra_js %}

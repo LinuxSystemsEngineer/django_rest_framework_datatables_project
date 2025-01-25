@@ -128,3 +128,4 @@ This project was built using code from:
 
 - **Mange Records / CRUD (create, read, update, delete) Page:**
 ![004_crud_operations.png](./img/004_crud_operations.png)
+

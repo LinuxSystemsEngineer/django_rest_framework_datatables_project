@@ -1,0 +1,8 @@
+coverage>=7.6.2
+Django>=5.1.2
+djangorestframework>=3.15.2
+pycodestyle>=2.12.1
+django-filter>=24.3
+djangorestframework-datatables>=0.7.2
+django-require-login>=1.1.4
+mimesis
