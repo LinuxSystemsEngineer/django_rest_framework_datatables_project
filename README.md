@@ -12,7 +12,7 @@ This free and open source project showcases the integration of Django REST Frame
 1. **Install the required ubuntu packages:**
 
     ```bash
-    apt update && apt install python3 python3-dev python3-venv -y
+    sudo apt update && sudo apt install python3 python3-dev python3-venv -y
     ```
 
 ## Installation
