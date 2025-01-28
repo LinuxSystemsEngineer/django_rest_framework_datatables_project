@@ -12,66 +12,77 @@ This free and open source project showcases the integration of Django REST Frame
 1. **Install the required ubuntu packages:**
 
     ```bash
-    apt update && apt install python3 python3-dev python3-venv -y
+    sudo apt update && sudo apt install python3 python3-dev python3-venv -y
     ```
 
 ## Installation
 
-1. **Create an isolated Python virtual environment:**
+1. **Use git to clone the repository into your current working directory**
+
+    ```bash
+    git clone https://github.com/LinuxSystemsEngineer/django_rest_framework_datatables_project.git
+    ```
+2. **Change directories to the newly cloned github repository you just cloned:**
+
+    ```bash
+    cd django_rest_framework_datatables_project
+    ```
+
+3. **Create an isolated Python virtual environment:**
 
     ```bash
     python3 -m venv .venv
     ```
 
-2. **Activate the newly created Python virtual environment:**
+4. **Activate the newly created Python virtual environment:**
 
     ```bash
     . .venv/bin/activate
     ```
 
-3. **Install required packages from the `requirements.txt` file:**
+5. **Install required packages from the `requirements.txt` file:**
 
     ```bash
     pip3 install -r requirements.txt
     ```
 
-4. **Make the database migrations:**
+6. **Make the database migrations:**
 
     ```bash
     python3 manage.py makemigrations
     ```
 
-5. **Actually migrate the database and create the `db.sqlite3`:**
+7. **Actually migrate the database and create the `db.sqlite3`:**
 
     ```bash
     python3 manage.py migrate
     ```
 
-6. **Create a python django admin account and password:**
+8. **Create a python django admin account and password:**
 
     ```bash
     python3 manage.py createsuperuser
     ```
 
-7. **Create obfuscated data for the vlans database:**
+9. **Create obfuscated data for the vlans database:**
 
     ```bash
-    ./create_db_vlans_vlans.py 
+    python3 ./create_db_vlans_vlans.py 
     ```
 
-8. **Create obfuscated data for the coresubnets database:**
+10. **Create obfuscated data for the coresubnets database:**
 
     ```bash
-    ./create_db_coresubnets.py
+    python3 ./create_db_coresubnets.py
     ```
 
-9. **Run the Django web framework app on port 8007:**
+11. **Run the Django web framework app on port 8007:**
 
     ```bash
     python3 manage.py runserver 0.0.0.0:8007
     ```
 
-10. **Access the django web app through your web browser:**
+12. **Access the django web app through your web browser:**
 
     ```bash
     with web browser, navigate to 127.0.0.1:8007
