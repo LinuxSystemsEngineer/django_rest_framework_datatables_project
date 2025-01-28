@@ -12,7 +12,7 @@ This free and open source project showcases the integration of Django REST Frame
 1. **Install the required ubuntu packages:**
 
     ```bash
-    sudo apt update && sudo apt install python3 python3-dev python3-venv -y
+    apt update && apt install python3 python3-dev python3-venv -y
     ```
 
 ## Installation
@@ -56,13 +56,13 @@ This free and open source project showcases the integration of Django REST Frame
 7. **Create obfuscated data for the vlans database:**
 
     ```bash
-    python3 ./create_db_vlans_vlans.py 
+    ./create_db_vlans_vlans.py 
     ```
 
 8. **Create obfuscated data for the coresubnets database:**
 
     ```bash
-    python3 ./create_db_coresubnets.py
+    ./create_db_coresubnets.py
     ```
 
 9. **Run the Django web framework app on port 8007:**
