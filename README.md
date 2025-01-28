@@ -22,7 +22,7 @@ This free and open source project showcases the integration of Django REST Frame
     ```bash
     git clone https://github.com/LinuxSystemsEngineer/django_rest_framework_datatables_project.git
     ```
-2. **Change directories to the newly cloned github repository you just cloned:**
+2. **Change directories to the newly cloned github repository:**
 
     ```bash
     cd django_rest_framework_datatables_project
