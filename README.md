@@ -7,14 +7,13 @@ This free and open source project showcases the integration of Django REST Frame
 - git
 - python3
 - pip3
-- vim
 
 ## Ubuntu packages
 
 1. **Install the required ubuntu apt packages:**
 
     ```bash
-    sudo apt update && sudo apt install git python3 python3-dev python3-venv vim -y
+    sudo apt update && sudo apt install git python3 python3-dev python3-venv -y
     ```
 
 ## Installation
