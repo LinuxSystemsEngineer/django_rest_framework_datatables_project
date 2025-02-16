@@ -1,16 +1,15 @@
 # Django REST Framework Datatables Project
 
 ## Overview
-This free and open source project showcases the integration of Django REST Framework with Datatables. This project provides both read-only datatables and full CRUD (create, read, update, and delete) operations with the django admin web interface.
+This free and open-source project showcases the integration of the Django REST Framework with Datatables. It provides read-only data tables and a complete data management system with (create, read, update, and delete) operations with the Django admin web interface.
 
 ## Requirements
 - git
 - python3
-- pip3
 
 ## Ubuntu packages
 
-1. **Install the required ubuntu apt packages:**
+1. **Install the required Ubuntu apt packages:**
 
     ```bash
     sudo apt update && sudo apt install git python3 python3-dev python3-venv -y
@@ -53,13 +52,13 @@ This free and open source project showcases the integration of Django REST Frame
     python3 manage.py makemigrations
     ```
 
-7. **Actually migrate the database and create the `db.sqlite3`:**
+7. **Migrate the database and create the `db.sqlite3`:**
 
     ```bash
     python3 manage.py migrate
     ```
 
-8. **Create a python django admin account and password:**
+8. **Create a Python Django admin account and password:**
 
     ```bash
     python3 manage.py createsuperuser
@@ -83,21 +82,21 @@ This free and open source project showcases the integration of Django REST Frame
     python3 manage.py runserver 0.0.0.0:8007
     ```
 
-12. **Access the django web app through your web browser:**
+12. **Access the Django web interface through your web browser:**
 
     ```bash
-    with web browser, navigate to 127.0.0.1:8007
+    with a web browser, navigate to 127.0.0.1:8007
     ```
 
 ## Usage
 
 - **Read-only Datatables:**
 
-    Access the read-only datatables at [http://hostserveripaddress:8007](http://hostserveripaddress:8007).
+    Access the read-only data tables at [http://hostserveripaddress:8007](http://hostserveripaddress:8007).
 
 - **CRUD Operations:**
 
-    For CRUD operations, go to [http://hostserveripaddress:8007/admin](http://hostserveripaddress:8007/admin) and log in with the username and password you created.
+    For data management operations, go to [http://hostserveripaddress:8007/admin](http://hostserveripaddress:8007/admin) and log in with the username and password you created.
 
 ## Features
 
@@ -109,15 +108,15 @@ This free and open source project showcases the integration of Django REST Frame
 - Mobile responsive design
 
 ## Programmer
- **Blake Jones** built this project. For any questions or further information, please contact me on linkedin.
+ **Blake Jones** built this project. For any questions or further information, you can contact me on LinkedIn.
 
 * https://www.linkedin.com/in/blake-jones-linux/
 
 ## Contributions
-Feel free to fork this project and submit pull requests. For significant changes, please open an issue first to discuss what you would like to change.
+Feel free to fork out this project and submit pull requests. For significant changes, please open an issue first to discuss what you want to change.
 
 ## Sources / References
-This project was built using code from:
+This project's code is from:
 
 * https://django-rest-framework-datatables.readthedocs.io/en/latest/tutorial.html.
 
@@ -138,6 +137,6 @@ This project was built using code from:
 - **VLANs Datatables Page:**
 ![003_vlans_datatables.png](./img/003_vlans_datatables.png)
 
-- **Mange Records / CRUD (create, read, update, delete) Page:**
+- **Manage Records / CRUD (create, read, update, delete) Page:**
 ![004_crud_operations.png](./img/004_crud_operations.png)
 
