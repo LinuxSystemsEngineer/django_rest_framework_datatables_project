@@ -1,0 +1,120 @@
+{% extends "vlans/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <h4 class="bg-primary text-white p-2" style="margin: 0px;">VLANs SQLite Database</h4>
+    </div>
+</div>
+<div class="row" style="background-color: white; padding: 20px; border-radius: 10px;">
+    <div class="col-sm-12 text-center">
+        <a href="/" class="btn btn-success mr-2">Home</a>  <!-- Home button -->
+        <a href="/admin/vlans/vlans/" class="btn btn-primary mr-2">Manage Records</a>
+        <form id="logout-form" method="post" action="/admin/logout/" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Log out</button>
+        </form>
+    </div>
+    <br><br>
+    <div class="col-sm-12">
+        <table id="vlans_table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID:</th>
+                    <th>VLAN:</th>
+                    <th>I-SID:</th>
+                    <th>Name:</th>
+                    <th>Subnet:</th>
+                    <th>Subnet Mask:</th>
+                    <th>Default Gateway:</th>
+                    <th>VRRP IP Address 1:</th>
+                    <th>VRRP IP Address 2:</th>
+                    <th>VRF:</th>
+                    <th>DHCP:</th>
+                    <th>DHCP Server 1:</th>
+                    <th>DHCP Server 2:</th>
+                    <th>Notes:</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<footer class="footer" style="margin-top: 25px;">
+    <div class="container">
+        <p class="text-muted text-center">
+            Copyright © 2024
+        </p>
+    </div>
+</footer>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Custom sorting function for DHCP column
+    $.fn.dataTable.ext.type.order['dhcp-pre'] = function (data) {
+        switch (data) {
+            case 'True': return 1;
+            case 'False': return 2;
+            case 'None': return 3;
+            default: return 4;
+        }
+    };
+
+    $('#vlans_table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "orderMulti": true,  // Enable multi-column sorting
+        "ajax": {
+            "url": "/api/vlans_data/",
+            "type": "GET",
+            "dataSrc": function(json) {
+                console.log('Received JSON:', json);  // Log received JSON data
+                return json.results.map(function(data) {
+                    data.dhcp = data.dhcp === true ? "True" : data.dhcp === false ? "False" : "None";  // Handle Boolean values
+                    return data;
+                });
+            },
+            "data": function(d) {
+                console.log('Outgoing data request:', d);  // Log outgoing request
+                d.page_size = d.length === -1 ? 10000 : d.length;  // Handle "All" entries (set a high number)
+                d.order_columns = d.order.map(function(o) { return d.columns[o.column].data; });  // Send column names for sorting
+                d.order_dirs = d.order.map(function(o) { return o.dir; });  // Send sort directions
+                return d;
+            }
+        },
+        "columns": [
+            {"data": "id"},
+            {"data": "vlan"},
+            {"data": "i_sid"},
+            {"data": "name"},
+            {"data": "subnet"},
+            {"data": "subnet_mask"},
+            {"data": "default_gateway"},
+            {"data": "vrrp_ip_address_1"},
+            {"data": "vrrp_ip_address_2"},
+            {"data": "vrf"},
+            {"data": "dhcp", "type": "dhcp"},  // Apply custom sorting type here
+            {"data": "dhcp_server_1"},
+            {"data": "dhcp_server_2"},
+            {"data": "notes"},
+        ],
+        "paging": true,
+        "pageLength": 10,
+        "lengthMenu": [
+            [10, 25, 50, 100],
+            [10, 25, 50, 100]
+        ],
+        "responsive": true,
+        "rowReorder": {
+            selector: 'td:nth-child(2)'
+        },
+        "dom": 'Blfrtip',
+        "buttons": ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5', 'print'],
+        "drawCallback": function(settings) {
+            console.log('DataTables Draw Callback:', settings);  // Log DataTables settings after each draw
+        }
+    });
+});
+</script>
+{% endblock %}

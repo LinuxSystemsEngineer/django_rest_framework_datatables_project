@@ -1,0 +1,127 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>VLANs SQLite database</title>
+  <meta name="description" content="VLANs SQLite database">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- Ensure mobile responsiveness -->
+
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/yadcf/0.9.4-beta.45/jquery.dataTables.yadcf.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" />
+  <link rel="stylesheet" href="//cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+  <link rel="stylesheet" href="//cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css" />
+  <link rel="stylesheet" href="//cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css" />
+  <link rel="stylesheet" href="//cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css" />
+
+  <style>
+    .dt-length,
+    .dt-search,
+    .dt-info,
+    .dt-paging,
+    .dt-buttons {
+        padding-bottom: 10px; /* Adjust the value as needed */
+        display: block; /* Ensures elements are displayed as block */
+        width: 100%; /* Ensures full-width alignment */
+        clear: both; /* Ensures no floating issues */
+    }
+
+    .dt-length label {
+        padding-left: 0.5em; /* Adjust the value as needed to create desired space */
+    }
+
+    .bg-primary {
+        background-color: #720000 !important; /* New background color */
+    }
+
+    body {
+        background-color: #720000 !important; /* Set main website background color to black */
+    }
+
+    @media (max-width: 768px) {
+        .container-fluid {
+            padding: 10px;
+            font-size: 1.2em;  /* Increase font size for mobile devices */
+        }
+    }
+
+    /* Style for the Back to Top button */
+    #backToTop {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: #720000;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 40px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 50px; /* Ensures the text is vertically centered */
+    }
+
+    #backToTop:hover {
+        background-color: #000;
+    }
+
+.dtr-data:before {
+  content: "\00a0\00a0";  /* Two non-breaking spaces */
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid" style="background-color: white; padding: 20px; border-radius: 10px;">
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" title="Back to top">&uarr;</button>
+
+  <script src="//code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/yadcf/0.9.4-beta.45/jquery.dataTables.yadcf.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script src="//cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+  <script src="//cdn.datatables.net/rowreorder/1.5.0/js/dataTables.rowReorder.js"></script>
+  <script src="//cdn.datatables.net/rowreorder/1.5.0/js/rowReorder.dataTables.js"></script>
+  <script src="//cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+  <script src="//cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
+  <script src="//cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+  <script src="//cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script src="//cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+  <script src="//cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
+  {% block extra_js %}{% endblock %}
+
+  <script>
+    // Show/Hide Back to Top button
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+        $('#backToTop').fadeIn();
+      } else {
+        $('#backToTop').fadeOut();
+      }
+    });
+
+    // Scroll to top when button is clicked
+    $('#backToTop').click(function() {
+      $('html, body').animate({ scrollTop: 0 }, 600);
+      return false;
+    });
+  </script>
+</body>
+</html>
